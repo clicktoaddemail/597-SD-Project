@@ -6,6 +6,7 @@ default: progRAM
 
 progRAM: main.o modulate.o
 	$(CC) $(CFLAGS) -o progRAM main.o modulate.o $(LIBS)
+	rm *.o
 
 modulate.o: modulate.c modulate.h
 	$(CC) $(CFLAGS) -c modulate.c
