@@ -15,4 +15,5 @@ main.o: main.c modulate.h
 	$(CC) $(CFLAGS) -c main.c
 
 clean:
-	rm progRAM *.o
+	rm -rf progRAM.*
+	rm progRAM

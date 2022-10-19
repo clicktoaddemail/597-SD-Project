@@ -1,14 +1,12 @@
 /*Source file for RAM modulation.
 CREATED: 10/13/22
-LAST MODIFIED: 10/17/22
+LAST MODIFIED: 10/18/22
 
 Changelog:
+10/18/22
+	- cleaned up code
 10/17/22
 	- completed multithreading
-10/14/22
-	- refactoring
-	- added multithreaded modulation for an integer
-	- TODO: complete multithreading
 */
 
 #include "modulate.h"
@@ -19,8 +17,8 @@ Changelog:
 pthread_mutex_t perform_swaps = PTHREAD_MUTEX_INITIALIZER;
 
 
-unsigned char RAM_array1[MEGA];
-unsigned char RAM_array2[MEGA];
+unsigned char RAM_array1[block_size];
+unsigned char RAM_array2[block_size];
 
 
 
@@ -43,8 +41,6 @@ void *oscillate(void *end_time) { //internal function that oscillates a specifie
 //--- PUBLIC FUNCTIONS ---//
 void modulate_i(int bits) {
 	
-	unsigned char RAM_array1[block_size];
-	unsigned char RAM_array2[block_size];
 	time_t bit_end_time = time(NULL) * 1000;
 	
 	for (char i = 0; i<32; i++) {
@@ -68,7 +64,7 @@ void multi_modulate_i(int bits, int cores) {
 	time_t bit_end_time = time(NULL) * 1000;
 	for (char i = 0;i<32;i++) {
 		bit_end_time = bit_end_time+time_per_bit_ms;
-		if ((bits>>i)&&0x00000001) { //only multithreads if there is a 1, to amplify the signal, might add delay....
+		if ((bits>>i)&&0x00000001) { //only multithreads if there is a 1, to amplify the signal
 			pthread_mutex_lock(&perform_swaps);
 			for (int j=0;j<cores; j++) {
 				pthread_create(&thread_id, NULL, oscillate, (void *)&bit_end_time);
