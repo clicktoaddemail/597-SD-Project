@@ -1,9 +1,11 @@
 /* Header file for RAM modulation, contains function headers and everything
 needed to make a program to modulate RAM.
 CREATED: 10/13/22
-LAST MODIFIED: 10/18/22
+LAST MODIFIED: 10/29/22
 
 Changelog:
+10/29/22
+	- increased block size to 2 MB
 10/18/22
 	- cleaned up code
 10/14/22
@@ -19,9 +21,9 @@ Changelog:
 
 
 //--- PUBLIC VARIABLES ---//
-static long int time_per_bit_ms = 1000; 	//time to spend on each bit, in ms
+static long int time_per_bit_ms = 1000;	 	//time to spend on each bit, in ms
 						//defaults to 1000ms
-const static int block_size = MEGA;		//the size of the memory block
+const static int block_size = 2*MEGA;		//the size of the memory block
 						//defaults to 1MB
 
 
