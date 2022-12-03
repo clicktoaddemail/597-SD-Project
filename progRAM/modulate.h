@@ -4,6 +4,8 @@ CREATED: 10/13/22
 LAST MODIFIED: 10/29/22
 
 Changelog:
+12/2/22
+	- changed macros
 10/29/22
 	- increased block size to 2 MB
 10/18/22
@@ -18,13 +20,11 @@ Changelog:
 #define KILO 1024
 #define MEGA KILO*1024
 #define GIGA MEGA*1024
-
+#define BLOCK_SIZE GIGA
 
 //--- PUBLIC VARIABLES ---//
-static long int time_per_bit_ms = 1000;	 	//time to spend on each bit, in ms
+static long int time_per_bit_ms = 200;	 	//time to spend on each bit, in ms
 						//defaults to 1000ms
-const static int block_size = 2*MEGA;		//the size of the memory block
-						//defaults to 1MB
 
 
 //--- PUBLIC FUNCTIONS ---//
